@@ -13,9 +13,6 @@ const app = express()
 
 const PORT = process.env.PORT
 
-// const key_id = "rzp_test_5ndz0S2JkbmF1B"
-// const key_secret = "mL1LHSYvoaMZSIm2uwyHM6r8"
-
 var instance = new Razorpay({
   key_id:process.env.key_id,
   key_secret:process.env.key_secret
