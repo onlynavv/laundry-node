@@ -18,7 +18,9 @@ var instance = new Razorpay({
   key_secret:process.env.key_secret
 });
 
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://laundry-react-app.netlify.app']
+}));
 
 app.use(express.json())
 
