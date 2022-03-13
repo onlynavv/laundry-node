@@ -91,6 +91,10 @@ async function placeOrder(order) {
     return await client.db("laundry").collection("orders").insertOne(order);
 }
 
+async function cancelRequest(id){
+    return await client.db("laundry").collection("orders").deleteOne({"_id":ObjectId(id)})
+}
+
 async function getOrderDetailById(id){
     return await client.db("laundry").collection("orders").findOne({"_id":ObjectId(id)})
 }
@@ -140,4 +144,4 @@ async function createUser(data) {
     return await client.db("laundry").collection("users").insertOne(data);
 }
 
-export {createService, createCategories, addProducts, addExtras, setDeliveryMethods, getAllServices, getAllCategoriesForService, getAllProductsForCategory, getExtras, getDeliveryMethods, getAllProductsByService, getUserByEmail, genPassword, createUser, getUserById, getServiceById, placeOrder, getOrderDetailById, userGetOrders, getProductById, updateProductById, deleteProduct, getAllOrders, getNewOrders, getOnProgressOrders, getCompletedOrders, updateOrderStatus}
+export {createService, createCategories, addProducts, addExtras, setDeliveryMethods, getAllServices, getAllCategoriesForService, getAllProductsForCategory, getExtras, getDeliveryMethods, getAllProductsByService, getUserByEmail, genPassword, createUser, getUserById, getServiceById, placeOrder, getOrderDetailById, userGetOrders, getProductById, updateProductById, deleteProduct, getAllOrders, getNewOrders, getOnProgressOrders, getCompletedOrders, updateOrderStatus, cancelRequest}

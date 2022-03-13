@@ -1,6 +1,6 @@
 import express from "express"
 import { authAndVerifyAdmin, authAndVerifyUser } from "./customauth.js"
-import { placeOrder, getOrderDetailById, userGetOrders, getAllOrders, getNewOrders, getOnProgressOrders, getCompletedOrders, updateOrderStatus } from "./helper.js"
+import { placeOrder, getOrderDetailById, userGetOrders, getAllOrders, getNewOrders, getOnProgressOrders, getCompletedOrders, updateOrderStatus, cancelRequest } from "./helper.js"
 const router = express.Router()
 
 // laundry order
@@ -37,6 +37,13 @@ router.route("/placeOrder")
     const result = await placeOrder({...orderDetails, grandTotal: parseInt(orderDetails.grandTotal), subTotal: parseInt(orderDetails.subTotal), deliveryCharge: parseInt(orderDetails.deliveryCharge), pickupDate: new Date(parseInt(orderDetails.pickupDate) * 1000).toISOString(),"orderedAt": new Date(), "orderStatus": "pickup requested", "orderUpdatedAt": new Date(), "statusArray":statusArray})
 
     console.log(result)
+    response.send(result)
+})
+
+router.route("/cancelRequest/:id")
+.delete(authAndVerifyUser, async(request, response)=>{
+    const {id} = request.params
+    const result = await cancelRequest(id)
     response.send(result)
 })
 
